@@ -10,26 +10,12 @@ import {
     Text,
     View
 } from 'react-native';
-import NavigationUtil from '../js/navigator/NavigationUtil'
 
-export default class WelcomePage extends Component {
-    //欢迎页定时跳转
-    componentDidMount() {
-        this.timer = setTimeout(() => {
-            NavigationUtil.resetToHomePage({
-                navigation: this.props.navigation
-            })
-        }, 200)
-    }
-
-    componentWillUnmount() {
-        this.timer && clearTimeout(this.timer)
-    }
-
+export default class TrendingPage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>WelcomePage</Text>
+                <Text>TrendingPage</Text>
             </View>
         );
     }
