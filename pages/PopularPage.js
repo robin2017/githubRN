@@ -10,12 +10,46 @@ import {
     Text,
     View
 } from 'react-native';
+import {
+    createAppContainer,
+    createMaterialTopTabNavigator
+} from 'react-navigation'
+import NavigationUtil from '../js/navigator/NavigationUtil'
 
 export default class PopularPage extends Component {
     render() {
+        const TabNavigator = createAppContainer(createMaterialTopTabNavigator({
+            PopularTab1: {
+                screen: PopularTab,
+                navigationOptions: {
+                    title: 'Tab1'
+                }
+            },
+            PopularTab2: {
+                screen: PopularTab,
+                navigationOptions: {
+                    title: 'Tab2'
+                }
+            }
+        }));
+        return <View style={{flex: 1, marginTop: 0}}>
+            <TabNavigator/>
+        </View>
+    }
+}
+
+//复用的组件
+class PopularTab extends Component {
+    render() {
+        const {tabLabel} = this.props;
         return (
             <View style={styles.container}>
-                <Text>PopularPage</Text>
+                <Text>{tabLabel}</Text>
+                <Text onPress={() => {
+                    NavigationUtil.goPage({
+                        navigation: this.props.navigation
+                    }, 'DetailPage')
+                }}>跳转到详情页</Text>
             </View>
         );
     }
