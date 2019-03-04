@@ -13,9 +13,19 @@ import {
 
 export default class TrendingPage extends Component {
     render() {
+        const {navigation} = this.props;
         return (
             <View style={styles.container}>
                 <Text>TrendingPage</Text>
+                <Button title='改变主题色'
+                        onPress={() => {
+                            navigation.setParams({
+                                theme: {
+                                    tintColor: 'red',
+                                    updateTime: new Date().getTime()
+                                }
+                            })
+                        }}/>
             </View>
         );
     }

@@ -30,7 +30,7 @@ const MainNavigator = createStackNavigator({
     DetailPage: {
         screen: DetailPage,
         navigationOptions: {
-            header: null,//禁用头部的bar，实现全屏显示
+
         }
     },
 });
