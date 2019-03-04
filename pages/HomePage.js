@@ -17,6 +17,7 @@ import MyPage from './MyPage'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Entypo from 'react-native-vector-icons/Entypo'
+import NavigationUtil from '../js/navigator/NavigationUtil'
 
 export default class HomePage extends Component {
     _tabNavigator() {
@@ -74,6 +75,8 @@ export default class HomePage extends Component {
     }
 
     render() {
+        //储存外层navigation
+        NavigationUtil.navigation = this.props.navigation
         const Tab = this._tabNavigator();
         return <Tab/>
     }

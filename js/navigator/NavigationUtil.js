@@ -23,9 +23,9 @@ export default class NavigationUtil {
      * 页面跳转时带参数
      * */
     static goPage(params, page) {
-        const {navigation} = params;
+        const navigation = NavigationUtil.navigation;
         if (!navigation) {
-            console.log('navigation can not be null')
+            console.log(' NavigationUtil.navigation can not be null')
             return;
         }
         navigation.navigate(page, {...params})
