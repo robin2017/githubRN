@@ -2,7 +2,6 @@
  * Created by robin on 2019/3/3
  */
 import React, {Component} from 'react';
-import {createAppContainer, createBottomTabNavigator} from 'react-navigation'
 import {
     Platform,
     StyleSheet,
