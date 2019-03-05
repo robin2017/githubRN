@@ -10,6 +10,13 @@ import {
 import WelcomePage from '../../pages/WelcomePage'
 import HomePage from '../../pages/HomePage'
 import DetailPage from '../../pages/DetailPage'
+import {connect} from 'react-redux'
+import {
+    createReactNavigationReduxMiddleware,
+    createReduxContainer
+} from 'react-navigation-redux-helpers'
+
+export const rootCom = 'Init';//设置根路由
 
 const InitNavigator = createStackNavigator({
     WelcomePage: {
@@ -29,12 +36,10 @@ const MainNavigator = createStackNavigator({
     },
     DetailPage: {
         screen: DetailPage,
-        navigationOptions: {
-
-        }
+        navigationOptions: {}
     },
 });
-export default createAppContainer(createSwitchNavigator(
+export const RootNavigator =  createAppContainer(createSwitchNavigator(
     {
         Init: InitNavigator,
         Main: MainNavigator,
@@ -45,3 +50,15 @@ export default createAppContainer(createSwitchNavigator(
         }
     }
 ))
+//1、初始化react-navigation与redux的中间件
+export const middleware = createReactNavigationReduxMiddleware(
+
+        state=>state.nav,    'root',
+);
+//2、将根导航器组件传递给reduxifyNavigator函数
+const AppWithNavigationState = createReduxContainer(RootNavigator,'root');
+
+const mapStateToProps = state=>({state:state.nav})
+
+//3、连接react组件和redux store
+export default connect(mapStateToProps)(AppWithNavigationState)
