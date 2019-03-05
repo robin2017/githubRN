@@ -18,7 +18,7 @@ export default class HomePage extends Component {
     render() {
         //储存外层navigation
         NavigationUtil.navigation = this.props.navigation
-
+        console.log('保存时：',NavigationUtil.navigation)
         return <DynamicTabNavigator/>
     }
 }

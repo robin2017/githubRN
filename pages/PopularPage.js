@@ -77,6 +77,7 @@ export default class PopularPage extends Component {
 class PopularTab extends Component {
     render() {
         const {tabLabel} = this.props;
+        console.log('读取时：',NavigationUtil.navigation)
         return (
             <View style={styles.container}>
                 <Text>{tabLabel}</Text>

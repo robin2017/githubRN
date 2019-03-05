@@ -100,7 +100,7 @@ const TABS = {
 
     render() {
         //储存外层navigation
-        NavigationUtil.navigation = this.props.navigation
+       // NavigationUtil.navigation = this.props.navigation
         const Tab = this._tabNavigator();
         return <Tab/>
     }
