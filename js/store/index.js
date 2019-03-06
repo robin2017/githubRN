@@ -3,16 +3,15 @@ import thunk from 'redux-thunk'
 import reducers from '../reducer'
 import {middleware} from '../navigator/AppNavigator'
 
-const logger = store =>next=>action=>{
-    if(typeof action==='function'){
+const logger = store => next => action => {
+    if (typeof action === 'function') {
         console.log("logger:dispatching a function")
-    }else {
-        console.log("logger:dispatching ",action)
+    } else {
+        console.log("logger:dispatching ", action)
     }
     const result = next(action)
-    console.log('logger:nextState ',store.getState())
-}
-
+    console.log('logger:nextState ', store.getState())
+};
 
 const middlewares = [
     middleware,
@@ -20,7 +19,4 @@ const middlewares = [
     thunk,
 ];
 
-/**
- * 创建store
- */
 export default createStore(reducers, applyMiddleware(...middlewares));

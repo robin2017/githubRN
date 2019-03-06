@@ -12,15 +12,16 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux'
 import actions from '../js/action'
- class TrendingPage extends Component {
+
+class TrendingPage extends Component {
     render() {
-        const {navigation} = this.props;
+
         return (
             <View style={styles.container}>
                 <Text>TrendingPage</Text>
                 <Button title='改变主题色'
                         onPress={() => {
-                      this.props.onThemeChange('#096')
+                            this.props.onThemeChange('#096')
                         }}/>
             </View>
         );
@@ -36,9 +37,9 @@ const styles = StyleSheet.create({
     }
 });
 
-const mapStateToProps =state=> ({})
-const mapDispatchToProps = dispatch=>({
-    onThemeChange:theme=>dispatch(actions.onThemeChange(theme))
-})
+const mapStateToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+    onThemeChange: theme => dispatch(actions.onThemeChange(theme))
+});
 
-export default connect(mapStateToProps,mapDispatchToProps)(TrendingPage)
+export default connect(mapStateToProps, mapDispatchToProps)(TrendingPage)

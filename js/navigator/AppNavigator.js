@@ -52,7 +52,6 @@ export const RootNavigator =  createAppContainer(createSwitchNavigator(
 ))
 //1、初始化react-navigation与redux的中间件
 export const middleware = createReactNavigationReduxMiddleware(
-
         state=>state.nav,    'root',
 );
 //2、将根导航器组件传递给reduxifyNavigator函数
