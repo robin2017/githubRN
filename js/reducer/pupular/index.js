@@ -21,7 +21,7 @@ export default function (state = defaultStatus, action) {
             return {
                 ...state,
                 [action.storeName]: {
-                    ...[action.storeName],
+                    ...state[action.storeName],
                     items: action.items,
                     isLoading: false
                 }
@@ -30,7 +30,7 @@ export default function (state = defaultStatus, action) {
             return {
                 ...state,
                 [action.storeName]: {
-                    ...[action.storeName],
+                    ...state[action.storeName],
 
                     isLoading: true
                 }
@@ -39,7 +39,7 @@ export default function (state = defaultStatus, action) {
             return {
                 ...state,
                 [action.storeName]: {
-                    ...[action.storeName],
+                    ...state[action.storeName],
                     isLoading: false
                 }
             };

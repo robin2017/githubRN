@@ -20,6 +20,7 @@ import {
 } from 'react-navigation'
 import NavigationUtil from '../js/navigator/NavigationUtil'
 import DynamicTabNavigator from "../js/navigator/DynamicTabNavigator";
+import PopularItem from '../js/common/PopularItem'
 
 let url = `https://api.github.com/search/repositories?q=`;
 const QUERY_STR = '&sort=stars';
@@ -107,11 +108,12 @@ class PopularTab extends Component {
 
     renderItem(data) {
         const item = data.item;
-        return <View style={{marginBottom: 10}}>
-            <Text style={{backgroundColor: '#faa'}}>
-                {JSON.stringify(item)}
-            </Text>
-        </View>
+        return <PopularItem
+            item={item}
+            onSelect={() => {
+
+            }}
+        />
     }
 
     render() {
