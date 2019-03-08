@@ -13,7 +13,7 @@ import {
     RefreshControl
 } from 'react-native';
 import {connect} from 'react-redux'
-import  actions from '../js/action'
+import actions from '../js/action'
 import {
     createAppContainer,
     createMaterialTopTabNavigator
@@ -52,7 +52,7 @@ export default class PopularPage extends Component {
         const tabs = {};
         this.tabNames.forEach((item, index) => {
             tabs[`tab${index}`] = {
-                screen: props =><PopularTabPage {...props} tabLabel={item}/>,
+                screen: props => <PopularTabPage {...props} tabLabel={item}/>,
                 navigationOptions: {
                     title: item,
                 }
@@ -84,71 +84,78 @@ export default class PopularPage extends Component {
 
 //复用的组件
 class PopularTab extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         const {tabLabel} = this.props;
         this.storeName = tabLabel;
     }
-    componentDidComponent(){
+
+    componentDidMount() {
         this.loadData()
     }
-    loadData(){
+
+    genFetchUrl(storeName) {
+        return url + storeName + QUERY_STR
+    }
+
+    loadData() {
         const {onLoadPopularData} = this.props;
         const url = this.genFetchUrl(this.storeName);
 
-        onLoadPopularData(this.storeName,url)
+        onLoadPopularData(this.storeName, url)
     }
-    renderItem(data){
+
+    renderItem(data) {
         const item = data.item;
-        return <View style={{marginBottom:10}}>
-            <Text style={{backgroundColor:'#faa'}}>
+        return <View style={{marginBottom: 10}}>
+            <Text style={{backgroundColor: '#faa'}}>
                 {JSON.stringify(item)}
             </Text>
         </View>
     }
+
     render() {
         const {popular} = this.props;
         let store = popular[this.storeName];//动态获取
-        if(!store){
+        if (!store) {
             store = {
-                items:[],
-                isLoading:false
+                items: [],
+                isLoading: false
             }
         }
-        console.log('读取时：',NavigationUtil.navigation)
+        console.log('读取时：', NavigationUtil.navigation)
         return (
             <View style={styles.container}>
-               <FlatList data={store.items}
-               renderItem={data=>this.renderItem(data)}
-               keyExtractor={item=>""+item.id}
-                         refreshControl={
-                             <RefreshControl
-                                 title='loading'
-                             titleColor={THEME_COLOR}
-                                 colors={[THEME_COLOR]}
-                                 refreshing={store.isLoading}
-                                 onRefresh={()=>this.loadData()}
-                                 tintColor={THEME_COLOR}
-                             />
+                <FlatList data={store.items}
+                          renderItem={data => this.renderItem(data)}
+                          keyExtractor={item => "" + item.id}
+                          refreshControl={
+                              <RefreshControl
+                                  title='loading'
+                                  titleColor={THEME_COLOR}
+                                  colors={[THEME_COLOR]}
+                                  refreshing={store.isLoading}
+                                  onRefresh={() => this.loadData()}
+                                  tintColor={THEME_COLOR}
+                              />
 
 
-
-                         }
-               />
+                          }
+                />
 
             </View>
         );
     }
 }
 
-const mapStateToProps = state=>({
-    popular:state.popular
+const mapStateToProps = state => ({
+    popular: state.popular
 });
-const mapDispatchToProps = dispatch=>({
-    onLoadPopularData:(storeName,url)=>dispatch(actions.onLoadPopularData(storeName,url))
+const mapDispatchToProps = dispatch => ({
+    onLoadPopularData: (storeName, url) => dispatch(actions.onLoadPopularData(storeName, url))
 })
 
-const PopularTabPage = connect(mapStateToProps,mapDispatchToProps)(PopularPage)
+const PopularTabPage = connect(mapStateToProps, mapDispatchToProps)(PopularTab)
 
 const styles = StyleSheet.create({
     container: {
