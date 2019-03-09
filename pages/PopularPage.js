@@ -146,6 +146,7 @@ class PopularTab extends Component {
     }
 
     genIndicator() {
+
         return this._store().hideLoadingMore ? null :
             <View style={styles.indicatorContainer}>
                 <ActivityIndicator
@@ -196,7 +197,7 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
     onRefreshPopular: (storeName, url) => dispatch(actions.onRefreshPopular(storeName, url,pageSize)),
-    onLoadMorePopular: (storeName, url) => dispatch(actions.onLoadMorePopular(storeName, url))
+    onLoadMorePopular: (storeName, url) => dispatch(actions.onLoadMorePopular(storeName, url,pageSize))
 })
 
 const PopularTabPage = connect(mapStateToProps, mapDispatchToProps)(PopularTab)
