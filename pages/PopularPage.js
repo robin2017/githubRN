@@ -178,11 +178,20 @@ class PopularTab extends Component {
 
                           }
                           ListFooterComponent={() => this.genIndicator()}
+                          //优化：一次滚动，只加载一次
                           onEndReached={() => {
-                              console.log('---onEndReached----');
-                              this.loadData(true);
+                              setTimeout(() => {
+                                  if (this.canLoadMore) {//fix 滚动时两次调用onEndReached https://github.com/facebook/react-native/issues/14015
+                                      this.loadData(true);
+                                //      this.canLoadMore = false;
+                                  }
+                              }, 100);
                           }}
                           onEndReachedThreshold={0.5}
+                          onMomentumScrollBegin={() => {
+                              this.canLoadMore = true; //fix 初始化时页调用onEndReached的问题
+                              console.log('---onMomentumScrollBegin-----')
+                          }}
                 />
                 <Toast ref={'toast'}
                        position={'center'}/>
